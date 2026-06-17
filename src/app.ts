@@ -10,6 +10,11 @@ import { apiKeyMiddleware } from "./middlewares/apiKey";
 const app = express();
 
 app.use(express.json());
+
+app.get("/", (_req, res) => {
+  res.json({ status: "ok", app: "lista-super-api" });
+});
+
 app.use(apiKeyMiddleware);
 
 app.use("/auth", authRouter);
