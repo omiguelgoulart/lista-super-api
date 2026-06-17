@@ -1,6 +1,9 @@
 import express from "express";
 import { userRouter } from "./routes/userRoute";
 import { authRouter } from "./routes/auth";
+import { listsRouter } from "./routes/lists";
+import { categoriesRouter } from "./routes/categories";
+import { itemsRouter } from "./routes/items";
 import { errorHandler } from "./middlewares/errorHandler";
 import { apiKeyMiddleware } from "./middlewares/apiKey";
 
@@ -11,6 +14,9 @@ app.use(apiKeyMiddleware);
 
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
+app.use("/lists", listsRouter);
+app.use("/lists/:listId/categories", categoriesRouter);
+app.use("/lists/:listId/items", itemsRouter);
 
 app.use(errorHandler);
 
