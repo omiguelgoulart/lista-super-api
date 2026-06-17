@@ -2,15 +2,12 @@ import { Router } from "express";
 import { ItemController } from "../controllers/itemController";
 import { ItemService } from "../services/itemsService";
 import { ItemRepository } from "../repositories/itemsModel";
-import { authMiddleware } from "../middlewares/auth";
 
 const itemsRouter = Router({ mergeParams: true });
 
 const repository = new ItemRepository();
 const service = new ItemService(repository);
 const controller = new ItemController(service);
-
-itemsRouter.use(authMiddleware);
 
 itemsRouter.get("/", (req, res, next) => controller.findAll(req, res, next));
 itemsRouter.get("/:id", (req, res, next) => controller.findById(req, res, next));

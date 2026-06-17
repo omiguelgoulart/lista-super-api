@@ -7,7 +7,8 @@ export class ListController {
 
     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const lists = await this.listService.findAll(res.locals.userId);
+            const { ownerId } = req.query;
+            const lists = await this.listService.findAll(ownerId as string | undefined);
             res.json(lists);
         } catch (error) {
             next(error);
@@ -26,7 +27,7 @@ export class ListController {
     async create(req: Request, res: Response, next: NextFunction) {
         try {
             const data = createListSchema.parse(req.body);
-            const newList = await this.listService.create({ ...data, ownerId: res.locals.userId });
+            const newList = await this.listService.create(data);
             res.status(201).json(newList);
         } catch (error) {
             next(error);

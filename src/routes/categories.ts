@@ -2,15 +2,12 @@ import { Router } from "express";
 import { CategoryController } from "../controllers/categoryController";
 import { CategoryService } from "../services/categoriesService";
 import { CategoryRepository } from "../repositories/categoriesRepository";
-import { authMiddleware } from "../middlewares/auth";
 
 const categoriesRouter = Router({ mergeParams: true });
 
 const repository = new CategoryRepository();
 const service = new CategoryService(repository);
 const controller = new CategoryController(service);
-
-categoriesRouter.use(authMiddleware);
 
 categoriesRouter.get("/", (req, res, next) => controller.findAll(req, res, next));
 categoriesRouter.get("/:id", (req, res, next) => controller.findById(req, res, next));
