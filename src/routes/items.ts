@@ -3,7 +3,7 @@ import { ItemController } from "../controllers/itemController";
 import { ItemService } from "../services/itemsService";
 import { ItemRepository } from "../repositories/itemsModel";
 
-const itemsRouter = Router({ mergeParams: true });
+const itemsRouter = Router();
 
 const repository = new ItemRepository();
 const service = new ItemService(repository);

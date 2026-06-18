@@ -8,7 +8,8 @@ export class ItemController {
 
     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const items = await this.itemService.findAll(req.params.listId);
+            const { listId } = req.query;
+            const items = await this.itemService.findAll(listId as string);
             res.json(items);
         } catch (error) {
             next(error);
@@ -27,7 +28,7 @@ export class ItemController {
     async create(req: Request, res: Response, next: NextFunction) {
         try {
             const data = createItemSchema.parse(req.body);
-            const item = await this.itemService.create({ ...data, listId: req.params.listId });
+            const item = await this.itemService.create(data);
             res.status(201).json(item);
         } catch (error) {
             next(error);
@@ -55,8 +56,8 @@ export class ItemController {
 
     async checkAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const { checked } = z.object({ checked: z.boolean() }).parse(req.body);
-            await this.itemService.checkAll(req.params.listId, checked);
+            const { listId, checked } = z.object({ listId: z.string().uuid(), checked: z.boolean() }).parse(req.body);
+            await this.itemService.checkAll(listId, checked);
             res.status(204).send();
         } catch (error) {
             next(error);

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const createItemSchema = z.object({
+    listId: z.string().uuid("listId deve ser um UUID válido"),
     name: z.string().min(1, "Nome do item é obrigatório"),
     quantity: z.number().positive().default(1),
     unit: z.string().optional(),

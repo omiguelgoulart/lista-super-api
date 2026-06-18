@@ -18,7 +18,7 @@ app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/lists", listsRouter);
 app.use("/lists/:listId/categories", categoriesRouter);
-app.use("/lists/:listId/items", itemsRouter);
+app.use("/items", itemsRouter);
 
 app.use(errorHandler);
 
