@@ -25,11 +25,11 @@ model List {
   name      String
   icon      String?
   color     String?
-  ownerId   String   @map("owner_id")
+  ownerId   String?  @map("owner_id")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  owner      User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  owner      User?      @relation(fields: [ownerId], references: [id], onDelete: SetNull)
   categories Category[]
   items      Item[]
   shares     Share[]

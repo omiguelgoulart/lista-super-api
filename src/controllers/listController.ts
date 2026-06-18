@@ -7,8 +7,7 @@ export class ListController {
 
     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const { ownerId } = req.query;
-            const lists = await this.listService.findAll(ownerId as string | undefined);
+            const lists = await this.listService.findAll();
             res.json(lists);
         } catch (error) {
             next(error);

@@ -5,9 +5,9 @@ import type { CreateListInput, UpdateListInput } from "../schemas/listSchema";
 export class ListRepository {
     constructor(private readonly prismaClient: PrismaClient = prisma) {}
 
-    async findAll(ownerId?: string) {
+    async findAll() {
         return this.prismaClient.list.findMany({
-        where: ownerId ? { ownerId } : undefined,
+        where: undefined,
         include: {
             categories: true,
             _count: { select: { items: true } },

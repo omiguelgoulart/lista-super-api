@@ -4,8 +4,8 @@ import type { CreateListInput, UpdateListInput } from "../schemas/listSchema";
 export class ListService {
     constructor(private readonly repository: ListRepository) {} 
 
-    async findAll(ownerId?: string) {
-        return this.repository.findAll(ownerId);
+    async findAll() {
+        return this.repository.findAll();
     }
 
     async findById(id: string) {
